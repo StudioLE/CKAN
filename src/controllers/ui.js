@@ -21,13 +21,16 @@ angular.module('app.ui', ['jsonFormatter'])
     return modules
   }
 
-  $scope.selected = false 
-  // $scope.selected = registry.installed_modules[Object.keys(registry.installed_modules)[0]]
+  $scope.selected = false
 
-  $scope.select = function(key, mod) {
-    mod.key = key
-    $scope.selected = mod
-    return true
+  $scope.select = function(key) {
+    // If already selected
+    if($scope.selected == key) {
+      $scope.selected = false
+    }
+    else {
+      $scope.selected = key
+    }
   }
 
 })

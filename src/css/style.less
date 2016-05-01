@@ -6,6 +6,9 @@
 
 @body: #fff;
 
+@black_fade: rgba(0, 0, 0, 0.25);
+
+@black_translucent: rgba(0, 0, 0, 0.75);
 
 @navy: fade(#263248, 90%);
 @light_navy: fade(lighten(#7E8AA2, 10%), 90%);
@@ -36,9 +39,12 @@ html, body {
 }
 
 body {
-  background: url(../img/norwich-b&w.jpg);
+  // Backgrounds from SVE album
+  // http://imgur.com/a/n4eHU
+  background: url(http://i.imgur.com/bNUYRsA.jpg);
+  background-attachment: fixed;
   background-position: center center;
-  background-size: auto;
+  background-size: cover;
   color: @body;
   font-family: "Overpass", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -51,7 +57,7 @@ body {
   bottom: 0;
   left: 0;
   z-index: -1;
-  background: rgba(0, 0, 0, 0.75);
+  background: @black_fade;
 }
 
 ::selection {
@@ -98,6 +104,23 @@ h1, h2, h3, h4, h5 {
 .main {
   padding: 100px 0;
   background: @bg;
+}
+
+/*****************************************************************
+*
+* Lists
+*
+******************************************************************/
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  padding-right: 10px;
+  display: inline;
+  white-space: nowrap;
 }
 
 
@@ -186,17 +209,27 @@ label {
 *
 ******************************************************************/
 
+.table {
+  margin-top: 52px;
+}
+
 .table-striped>tbody>tr:nth-of-type(odd) {
   background-color: @nav_bg_hover;
 }
 
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-  // border: none;
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .table-hover > tbody > tr:hover {
   background-color: @nav_bg_hover;
 }
+
+.table > tbody > tr.active > td,
+.table > tbody > tr.active:hover > td {
+  background-color: @nav_bg_active;
+}
+
 
 tr.removed {
   text-decoration: line-through;
@@ -220,11 +253,11 @@ th {
 
 /*****************************************************************
 *
-* Selected Mod
+* Selected Mod Infobox
 *
 ******************************************************************/
 
-#selected-mod {
+.infobox {
   // margin-top: 100px;
   height: 350px;
   overflow: auto;
@@ -236,7 +269,7 @@ th {
   left: 0;
   z-index: 1030;
 
-  background: #000;
+  background: @black_translucent;
 }
 
 .cell-6 {
@@ -256,15 +289,21 @@ th {
 }
 
 .cell-12 {
-  .make-xs-column(12);
+  .make-xs-column(6);
+}
+
+.cell-12 {
+  .make-sm-column(12);
 }
 
 @media (min-width: 768px) {
-  #selected-mod {
+  .infobox {
     margin-top: 100px;
     height: auto;
     // bottom: auto;
     top: 0;
+
+    background: transparent;
 
   }
 

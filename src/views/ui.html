@@ -2,51 +2,56 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div id="selected-mod" class="col-sm-4" ng-if="selected">
-        <h1>{{ selected.source_module.name }}</h1>
-        <p>{{ selected.source_module.abstract }}</p>
+      <div class="infobox col-sm-4" ng-if=" ! selected">
+        <h1>CKAN</h1>
+        <p>The CKAN is a metadata respository and associated tools to allow you to find, install, and manage mods for Kerbal Space Program. It provides strong assurances that mods are installed in the way prescribed by their metadata files, for the correct version of Kerbal Space Program, alongside their dependencies, and without any conflicting mods.</p>
+      </div>
+
+      <div class="infobox col-sm-4" ng-if="selected">
+        <h1>{{ modules()[selected].source_module.name }}</h1>
+        <p>{{ modules()[selected].source_module.abstract }}</p>
 
         <div class="row">
           <div class="cell-12">
             <dl>
               <dt>Author</dt>
-              <dd>{{ selected.source_module.author.join(', ') }}</dd>
+              <dd>{{ modules()[selected].source_module.author.join(', ') }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Installed Version</dt>
-              <dd>{{ selected.source_module.version }}</dd>
+              <dd>{{ modules()[selected].source_module.version }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Latest Version</dt>
-              <dd>{{ selected.source_module.version }}</dd>
+              <dd>{{ modules()[selected].source_module.version }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Max KSP Version</dt>
-              <dd>{{ selected.source_module.ksp_version }}</dd>
+              <dd>{{ modules()[selected].source_module.ksp_version }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Download Size</dt>
-              <dd>{{ selected.source_module.download_size | bytes }}</dd>
+              <dd>{{ modules()[selected].source_module.download_size | bytes }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>License</dt>
-              <dd>{{ selected.source_module.license.join(', ') }}</dd>
+              <dd>{{ modules()[selected].source_module.license.join(', ') }}</dd>
             </dl>
           </div>
           <div class="cell-6" ng-if="selected.source_module.release_status">
             <dl>
               <dt>Release Status</dt>
-              <dd>{{ selected.source_module.release_status }}</dd>
+              <dd>{{ modules()[selected].source_module.release_status }}</dd>
             </dl>
           </div>
           <div class="cell-6">
@@ -54,9 +59,9 @@
               <dt>Links</dt>
               <dd>
                 <ul>
-                  <li ng-if="selected.source_module.resources.homepage"><a ng-href="{{ selected.source_module.resources.homepage }}">Homepage</a></li>
-                  <li ng-if="selected.source_module.resources.spacedock"><a ng-href="{{ selected.source_module.resources.spacedock }}">Space Dock</a></li>
-                  <li ng-if="selected.source_module.resources.repository"><a ng-href="{{ selected.source_module.resources.repository }}">Source Code</a></li>
+                  <li ng-if="modules()[selected].source_module.resources.homepage"><a ng-href="{{ modules()[selected].source_module.resources.homepage }}">Homepage</a></li>
+                  <li ng-if="modules()[selected].source_module.resources.spacedock"><a ng-href="{{ modules()[selected].source_module.resources.spacedock }}">Space Dock</a></li>
+                  <li ng-if="modules()[selected].source_module.resources.repository"><a ng-href="{{ modules()[selected].source_module.resources.repository }}">Source Code</a></li>
                 </ul>
               </dd>
             </dl>
@@ -64,7 +69,7 @@
           <div class="cell-12">
             <dl>
               <dt>Identifier</dt>
-              <dd>{{ selected.key }}</dd>
+              <dd>{{ selected }}</dd>
             </dl>
           </div>
         </div> <!-- .row -->
@@ -79,11 +84,13 @@
             <th style="width: 40%;">Name</th>
             <th style="width: 30%;">Author</th>
             <th style="width: 10%;">Size</th>
-            <th style="width: 10%;">Max KSP Version</th>
+            <th style="width: 10%;">KSP</th>
           </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="(key, mod) in modules()" ng-click="select(key, mod)">
+          <tr ng-repeat="(key, mod) in modules()"
+            ng-click="select(key, mod)"
+            ng-class="selected == key ? 'active' : ''">
             <td class="text-center" ng-if="mod.status == 'installed'"><i class="fa fa-check" aria-hidden="true"></i></td>
             <td class="text-center" ng-if="mod.status == 'update'"><i class="fa fa-spinner" aria-hidden="true"></i></td>
             <td class="text-center" ng-if="mod.status == 'available'"><i class="fa fa-download" aria-hidden="true"></i></td>
@@ -99,8 +106,3 @@
     </div> <!-- .row -->
   </div> <!-- .container -->
 </div> <!-- .main -->
-
-<h1>Mods</h1>
-<json-formatter class="json-formatter-dark" json="modules()" open="1"></json-formatter>
-
-
