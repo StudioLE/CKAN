@@ -2,56 +2,68 @@
   <div class="container-fluid">
     <div class="row">
 
+      <div class="col-sm-offset-4 col-sm-8">
+        <form>
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
+
+              <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>      
+          </div>
+        </form>
+      </div>
+
       <div class="infobox col-sm-4" ng-if=" ! selected">
         <h1>CKAN</h1>
         <p>The CKAN is a metadata respository and associated tools to allow you to find, install, and manage mods for Kerbal Space Program. It provides strong assurances that mods are installed in the way prescribed by their metadata files, for the correct version of Kerbal Space Program, alongside their dependencies, and without any conflicting mods.</p>
       </div>
 
       <div class="infobox col-sm-4" ng-if="selected">
-        <h1>{{ modules()[selected].source_module.name }}</h1>
-        <p>{{ modules()[selected].source_module.abstract }}</p>
+        <h1>{{ selectedMod.source_module.name }}</h1>
+        <p>{{ selectedMod.source_module.abstract }}</p>
 
         <div class="row">
           <div class="cell-12">
             <dl>
               <dt>Author</dt>
-              <dd>{{ modules()[selected].source_module.author.join(', ') }}</dd>
+              <dd>{{ selectedMod.source_module.author.join(', ') }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Installed Version</dt>
-              <dd>{{ modules()[selected].source_module.version }}</dd>
+              <dd>{{ selectedMod.source_module.version }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Latest Version</dt>
-              <dd>{{ modules()[selected].source_module.version }}</dd>
+              <dd>{{ selectedMod.source_module.version }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Max KSP Version</dt>
-              <dd>{{ modules()[selected].source_module.ksp_version }}</dd>
+              <dd>{{ selectedMod.source_module.ksp_version }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>Download Size</dt>
-              <dd>{{ modules()[selected].source_module.download_size | bytes }}</dd>
+              <dd>{{ selectedMod.source_module.download_size | bytes }}</dd>
             </dl>
           </div>
           <div class="cell-6">
             <dl>
               <dt>License</dt>
-              <dd>{{ modules()[selected].source_module.license.join(', ') }}</dd>
+              <dd>{{ selectedMod.source_module.license.join(', ') }}</dd>
             </dl>
           </div>
           <div class="cell-6" ng-if="selected.source_module.release_status">
             <dl>
               <dt>Release Status</dt>
-              <dd>{{ modules()[selected].source_module.release_status }}</dd>
+              <dd>{{ selectedMod.source_module.release_status }}</dd>
             </dl>
           </div>
           <div class="cell-6">
@@ -59,9 +71,9 @@
               <dt>Links</dt>
               <dd>
                 <ul>
-                  <li ng-if="modules()[selected].source_module.resources.homepage"><a ng-href="{{ modules()[selected].source_module.resources.homepage }}">Homepage</a></li>
-                  <li ng-if="modules()[selected].source_module.resources.spacedock"><a ng-href="{{ modules()[selected].source_module.resources.spacedock }}">Space Dock</a></li>
-                  <li ng-if="modules()[selected].source_module.resources.repository"><a ng-href="{{ modules()[selected].source_module.resources.repository }}">Source Code</a></li>
+                  <li ng-if="selectedMod.source_module.resources.homepage"><a ng-href="{{ selectedMod.source_module.resources.homepage }}">Homepage</a></li>
+                  <li ng-if="selectedMod.source_module.resources.spacedock"><a ng-href="{{ selectedMod.source_module.resources.spacedock }}">Space Dock</a></li>
+                  <li ng-if="selectedMod.source_module.resources.repository"><a ng-href="{{ selectedMod.source_module.resources.repository }}">Source Code</a></li>
                 </ul>
               </dd>
             </dl>
@@ -69,7 +81,7 @@
           <div class="cell-12">
             <dl>
               <dt>Identifier</dt>
-              <dd>{{ selected }}</dd>
+              <dd>{{ selectedMod.source_module.identifier }}</dd>
             </dl>
           </div>
         </div> <!-- .row -->
@@ -80,21 +92,51 @@
         <table class="table table-hover">
           <thead>
           <tr>
-            <th style="width: 10%;">Status</th>
-            <th style="width: 40%;">Name</th>
-            <th style="width: 30%;">Author</th>
-            <th style="width: 10%;">Size</th>
-            <th style="width: 10%;">KSP</th>
+            <th style="width: 10%;">
+              <a href="#" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+                Status
+                <span ng-show="sortType == 'status' && ! sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th style="width: 40%;">
+              <a href="#" ng-click="sortType = 'source_module.name'; sortReverse = ! sortReverse">
+                Name
+                <span ng-show="sortType == 'source_module.name' && ! sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'source_module.name' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th style="width: 30%;">
+              <a href="#" ng-click="sortType = 'source_module.author'; sortReverse = ! sortReverse">
+                Author
+                <span ng-show="sortType == 'source_module.author' && ! sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'source_module.author' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th style="width: 10%;">
+              <a href="#" ng-click="sortType = 'source_module.download_size'; sortReverse = ! sortReverse">
+                Size
+                <span ng-show="sortType == 'source_module.download_size' && ! sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'source_module.download_size' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th style="width: 10%;">
+              <a href="#" ng-click="sortType = 'source_module.ksp_version'; sortReverse = ! sortReverse">
+                KSP
+                <span ng-show="sortType == 'source_module.ksp_version' && ! sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'source_module.ksp_version' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
           </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="(key, mod) in modules()"
-            ng-click="select(key, mod)"
-            ng-class="selected == key ? 'active' : ''">
-            <td class="text-center" ng-if="mod.status == 'installed'"><i class="fa fa-check" aria-hidden="true"></i></td>
-            <td class="text-center" ng-if="mod.status == 'update'"><i class="fa fa-spinner" aria-hidden="true"></i></td>
-            <td class="text-center" ng-if="mod.status == 'available'"><i class="fa fa-download" aria-hidden="true"></i></td>
-            <td class="text-center" ng-if="mod.status == 'unavailable'"><i class="fa fa-times" aria-hidden="true"></i></td>
+          <tr ng-repeat="(key, mod) in modules() | orderBy:sortType:sortReverse | filter:searchTerm"
+            ng-click="select(mod.source_module.identifier, mod)"
+            ng-class="selected === mod.source_module.identifier ? 'active' : ''">
+            <td class="text-center" ng-if="mod.status == '1-installed'"><i class="fa fa-check" aria-hidden="true"></i></td>
+            <td class="text-center" ng-if="mod.status == '2-update'"><i class="fa fa-spinner" aria-hidden="true"></i></td>
+            <td class="text-center" ng-if="mod.status == '3-available'"><i class="fa fa-download" aria-hidden="true"></i></td>
+            <td class="text-center" ng-if="mod.status == '4-unavailable'"><i class="fa fa-times" aria-hidden="true"></i></td>
             <td>{{ mod.source_module.name }}</td>
             <td>{{ mod.source_module.author.join(', ') }}</td>
             <td>{{ mod.source_module.download_size | bytes }}</td>

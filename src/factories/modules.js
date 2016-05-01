@@ -45,23 +45,23 @@ angular.module('app.modulesFactory', [])
         _.each(mods, function(mod, key) {
           // @todo Method to check whether update is available
           if(mod.install_time && false) {
-            mods[key].status = 'update'
+            mods[key].status = '2-update'
           }
           else if(mod.install_time) {
-            mods[key].status = 'installed'
+            mods[key].status = '1-installed'
           }
           // @todo Check validity of this semver method
           else if(semver.valid(mod.source_module.ksp_version) && semver.lt(mod.source_module.ksp_version, Config.ksp_version)) {
-            mods[key].status = 'unavailable'
+            mods[key].status = '4-unavailable'
           }
           else {
-            mods[key].status = 'available'
+            mods[key].status = '3-available'
           }
         })
-
         console.log(mods)
 
-        return mods
+        // Convert to array
+        return _.values(mods)
       })
     }
   }
