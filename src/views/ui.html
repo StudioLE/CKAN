@@ -43,16 +43,10 @@
               <dd>{{ selected.source_module.license.join(', ') }}</dd>
             </dl>
           </div>
-          <div class="cell-6">
+          <div class="cell-6" ng-if="selected.source_module.release_status">
             <dl>
               <dt>Release Status</dt>
               <dd>{{ selected.source_module.release_status }}</dd>
-            </dl>
-          </div>
-          <div class="cell-6">
-            <dl>
-              <dt>Identifier</dt>
-              <dd>{{ selected.key }}</dd>
             </dl>
           </div>
           <div class="cell-6">
@@ -65,6 +59,12 @@
                   <li ng-if="selected.source_module.resources.repository"><a ng-href="{{ selected.source_module.resources.repository }}">Source Code</a></li>
                 </ul>
               </dd>
+            </dl>
+          </div>
+          <div class="cell-12">
+            <dl>
+              <dt>Identifier</dt>
+              <dd>{{ selected.key }}</dd>
             </dl>
           </div>
         </div> <!-- .row -->
@@ -84,7 +84,10 @@
           </thead>
           <tbody>
           <tr ng-repeat="(key, mod) in modules()" ng-click="select(key, mod)">
-            <td class="text-center"><i class="fa fa-check" aria-hidden="true"></i></td>
+            <td class="text-center" ng-if="mod.status == 'installed'"><i class="fa fa-check" aria-hidden="true"></i></td>
+            <td class="text-center" ng-if="mod.status == 'update'"><i class="fa fa-spinner" aria-hidden="true"></i></td>
+            <td class="text-center" ng-if="mod.status == 'available'"><i class="fa fa-download" aria-hidden="true"></i></td>
+            <td class="text-center" ng-if="mod.status == 'unavailable'"><i class="fa fa-times" aria-hidden="true"></i></td>
             <td>{{ mod.source_module.name }}</td>
             <td>{{ mod.source_module.author.join(', ') }}</td>
             <td>{{ mod.source_module.download_size | bytes }}</td>

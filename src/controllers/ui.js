@@ -8,11 +8,10 @@ angular.module('app.ui', ['jsonFormatter'])
 *
 ******************************************************************/
 .controller('UICtrl', function($scope, Config, Modules) {
-  var modules
-
   /**
-   * Load the registry
+   * Load and concatenate modules
    */
+  var modules
   Modules.get().then(function(data){
     modules = data
     console.log(modules)
@@ -26,8 +25,8 @@ angular.module('app.ui', ['jsonFormatter'])
   // $scope.selected = registry.installed_modules[Object.keys(registry.installed_modules)[0]]
 
   $scope.select = function(key, mod) {
-  	mod.key = key
-  	$scope.selected = mod
+    mod.key = key
+    $scope.selected = mod
     return true
   }
 

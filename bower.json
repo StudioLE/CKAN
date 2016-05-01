@@ -19,6 +19,7 @@
     "jquery": "~2.2.3",
     "less": "~2.6.1",
     "lodash": "~4.11.1",
-    "overpass": "*"
+    "overpass": "*",
+    "semver": "^4.3.4"
   }
 }

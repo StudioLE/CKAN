@@ -7,7 +7,7 @@ angular.module('app.modulesFactory', [])
 * Modules factory
 *
 ******************************************************************/
-.factory('Modules', function(Registry) {
+.factory('Modules', function(Registry, Config) {
   return {
 
     /**
@@ -22,7 +22,7 @@ angular.module('app.modulesFactory', [])
       return Registry.load().then(function(registry){
         // registry = data
         console.log(registry)
-        
+
         // Add all installed modules
         var mods = registry.installed_modules
 
@@ -38,6 +38,24 @@ angular.module('app.modulesFactory', [])
             mods[key] = {
               source_module: _.findLast(mod.module_version)
             }
+          }
+        })
+
+        // Go through all mods and set status
+        _.each(mods, function(mod, key) {
+          // @todo Method to check whether update is available
+          if(mod.install_time && false) {
+            mods[key].status = 'update'
+          }
+          else if(mod.install_time) {
+            mods[key].status = 'installed'
+          }
+          // @todo Check validity of this semver method
+          else if(semver.valid(mod.source_module.ksp_version) && semver.lt(mod.source_module.ksp_version, Config.ksp_version)) {
+            mods[key].status = 'unavailable'
+          }
+          else {
+            mods[key].status = 'available'
           }
         })
 

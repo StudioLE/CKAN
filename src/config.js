@@ -8,5 +8,6 @@ angular.module('app.config', [])
 *
 ******************************************************************/
 .constant('Config', {
-  registry_url: 'data/registry.json'
+  registry_url: 'data/registry.json',
+  ksp_version: '1.1.2'
 })
