@@ -29,7 +29,7 @@ angular.module('app', [
 ******************************************************************/
 .filter('bytes', function() {
   return function(bytes, precision) {
-    if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+    if (bytes==0 || isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
     if (typeof precision === 'undefined') precision = 1;
     var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
       number = Math.floor(Math.log(bytes) / Math.log(1024));
