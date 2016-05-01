@@ -259,18 +259,7 @@ th {
 ******************************************************************/
 
 .infobox {
-  // margin-top: 100px;
-  height: 350px;
   overflow: auto;
-
-  position: fixed;
-  // top: 0;
-  // right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1030;
-
-  background: @black_translucent;
 }
 
 .cell-6 {
@@ -300,12 +289,17 @@ th {
 @media (min-width: 768px) {
   .infobox {
     margin-top: 100px;
-    height: auto;
-    // bottom: auto;
+    position: fixed;
     top: 0;
-
-    background: transparent;
-
+    // right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
   }
+}
 
+@media (max-width: 1199px) {
+  .table {
+    .table-condensed
+  }
 }

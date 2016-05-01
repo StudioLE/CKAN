@@ -2,18 +2,6 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-sm-offset-4 col-sm-8">
-        <form>
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
-
-              <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            </div>      
-          </div>
-        </form>
-      </div>
-
       <div class="infobox col-sm-4" ng-if=" ! selected">
         <h1>CKAN</h1>
         <p>The CKAN is a metadata respository and associated tools to allow you to find, install, and manage mods for Kerbal Space Program. It provides strong assurances that mods are installed in the way prescribed by their metadata files, for the correct version of Kerbal Space Program, alongside their dependencies, and without any conflicting mods.</p>
@@ -86,6 +74,18 @@
           </div>
         </div> <!-- .row -->
       </div> <!-- .col -->
+
+      <div class="col-sm-offset-4 col-sm-8">
+        <form>
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
+
+              <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>      
+          </div>
+        </form>
+      </div>
 
 
       <div class="col-sm-8 col-sm-offset-4">
