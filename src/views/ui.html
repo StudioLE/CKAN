@@ -7,6 +7,7 @@
         <p>The CKAN is a metadata respository and associated tools to allow you to find, install, and manage mods for Kerbal Space Program. It provides strong assurances that mods are installed in the way prescribed by their metadata files, for the correct version of Kerbal Space Program, alongside their dependencies, and without any conflicting mods.</p>
       </div>
 
+
       <div class="infobox col-sm-4" ng-if="selected">
         <h1>{{ selectedMod.source_module.name }}</h1>
         <p>{{ selectedMod.source_module.abstract }}</p>
@@ -75,7 +76,7 @@
         </div> <!-- .row -->
       </div> <!-- .col -->
 
-      <div class="col-sm-offset-4 col-sm-8">
+      <div class="col-sm-offset-4 col-sm-8" ng-if=" ! showProgress">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Search"
                 ng-model="searchTerm"
@@ -92,9 +93,18 @@
           </div> <!-- .input-group-btn -->
         </div> <!-- .input-group -->
       </div> <!-- .col -->
+      
+
+      <div class="col-sm-offset-4 col-sm-8" ng-if="showProgress">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" ng-style="{ width: progress + '%'}">
+            {{ progressText }} <span class="text-muted">{{ progress }}%</span>
+          </div>
+        </div>
+      </div> <!-- .col -->
 
 
-      <div class="col-sm-8 col-sm-offset-4">
+      <div class="col-sm-8 col-sm-offset-4" ng-if=" ! showProgress">
         <table class="table table-hover">
           <thead>
           <tr>

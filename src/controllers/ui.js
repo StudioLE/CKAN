@@ -7,7 +7,7 @@ angular.module('app.ui', ['jsonFormatter'])
 * UI controlller
 *
 ******************************************************************/
-.controller('UICtrl', function($scope, Config, Modules) {
+.controller('UICtrl', function($scope, $timeout, Config, Modules) {
   /**
    * Load and concatenate modules
    */
@@ -36,7 +36,25 @@ angular.module('app.ui', ['jsonFormatter'])
     }
   }
 
+  $scope.showProgress = true
+  $scope.progressText = 'Updating repositories'
+  $scope.progress = 0
 
+  var updateProgress = function() {
+    $scope.progress = $scope.progress + 5
+    console.log($scope.progress)
+    if($scope.progress < 100) {
+      $timeout(updateProgress, 500)
+    }
+    else {
+      $scope.progressText = 'Repositories Updated'
+      $timeout(function() {
+        $scope.showProgress = false
+      }, 2000)
+    }
+  }
+
+  if($scope.showProgress) updateProgress()
 
   $scope.sortType = 'status' 
   // $scope.sortType = 'source_module.name'
