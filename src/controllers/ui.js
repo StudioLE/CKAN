@@ -17,11 +17,6 @@ angular.module('app.ui', ['jsonFormatter'])
     console.log(modules)
   })
 
-  $scope.sortType = 'status' 
-  // $scope.sortType = 'source_module.name'
-  $scope.sortReverse = false
-  $scope.searchFish = ''
-
   $scope.modules = function() {
     return modules
   }
@@ -40,5 +35,47 @@ angular.module('app.ui', ['jsonFormatter'])
       $scope.selectedMod = mod
     }
   }
+
+
+
+  $scope.sortType = 'status' 
+  // $scope.sortType = 'source_module.name'
+  $scope.sortReverse = false
+  $scope.searchTerm = ''
+  $scope.searchCol = 'name'
+  $scope.searchObj = {
+    source_module: {
+      name: $scope.searchTerm 
+    } 
+  }
+
+  $scope.search = function(term, col) {
+    if(col == 'name') {
+      $scope.searchObj = {
+        source_module: {
+          name: term
+        } 
+      }
+    }
+    else if(col == 'author') {
+      $scope.searchObj = {
+        source_module: {
+          author: term
+        } 
+      }
+    }
+    else if(col == 'status') {
+      $scope.searchObj = {
+        status: term
+      }
+    }
+    else {
+      $scope.searchObj = {
+        $: term
+      }
+    }
+  }
+
+ 
 
 })
