@@ -1,0 +1,103 @@
+<div class="main">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div id="selected-mod" class="col-sm-4" ng-if="selected">
+        <h1>{{ selected.source_module.name }}</h1>
+        <p>{{ selected.source_module.abstract }}</p>
+
+        <div class="row">
+          <div class="cell-12">
+            <dl>
+              <dt>Author</dt>
+              <dd>{{ selected.source_module.author.join(', ') }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>Installed Version</dt>
+              <dd>{{ selected.source_module.version }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>Latest Version</dt>
+              <dd>{{ selected.source_module.version }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>Max KSP Version</dt>
+              <dd>{{ selected.source_module.ksp_version }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>Download Size</dt>
+              <dd>{{ selected.source_module.download_size | bytes }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>License</dt>
+              <dd>{{ selected.source_module.license.join(', ') }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>Release Status</dt>
+              <dd>{{ selected.source_module.release_status }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>Identifier</dt>
+              <dd>{{ selected.key }}</dd>
+            </dl>
+          </div>
+          <div class="cell-6">
+            <dl>
+              <dt>Links</dt>
+              <dd>
+                <ul>
+                  <li ng-if="selected.source_module.resources.homepage"><a ng-href="{{ selected.source_module.resources.homepage }}">Homepage</a></li>
+                  <li ng-if="selected.source_module.resources.spacedock"><a ng-href="{{ selected.source_module.resources.spacedock }}">Space Dock</a></li>
+                  <li ng-if="selected.source_module.resources.repository"><a ng-href="{{ selected.source_module.resources.repository }}">Source Code</a></li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+        </div> <!-- .row -->
+      </div> <!-- .col -->
+
+
+      <div class="col-sm-8 col-sm-offset-4">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th style="width: 10%;">Status</th>
+            <th style="width: 40%;">Name</th>
+            <th style="width: 30%;">Author</th>
+            <th style="width: 10%;">Size</th>
+            <th style="width: 10%;">Max KSP Version</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="(key, mod) in registry().installed_modules" ng-click="select(key, mod)">
+            <td class="text-center"><i class="fa fa-check" aria-hidden="true"></i></td>
+            <td>{{ mod.source_module.name }}</td>
+            <td>{{ mod.source_module.author.join(', ') }}</td>
+            <td>{{ mod.source_module.download_size | bytes }}</td>
+            <td>{{ mod.source_module.ksp_version }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div> <!-- .col -->
+    </div> <!-- .row -->
+  </div> <!-- .container -->
+</div> <!-- .main -->
+
+<h1>Registry</h1>
+        <json-formatter class="json-formatter-dark" json="registry()" open="1"></json-formatter>
+
+

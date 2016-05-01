@@ -1,0 +1,24 @@
+{
+  "name": "ckan_gui",
+  "description": "CKAN - GUI",
+  "version": "0.0.1",
+  "homepage": "https://github.com/StudioLE/CKAN",
+  "license": "",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.5",
+    "angular-loader": "~1.5.5",
+    "angular-local-storage": "~0.2.3",
+    "angular-mocks": "~1.5.5",
+    "angular-resource": "~1.5.5",
+    "angular-route": "~1.5.5",
+    "async": "^2.0.0-rc.3",
+    "bootstrap": "~3.3.5",
+    "font-awesome": "fontawesome#~4.4.0",
+    "json-formatter": "~0.4.0",
+    "jquery": "~2.2.3",
+    "less": "~2.6.1",
+    "lodash": "~4.11.1",
+    "overpass": "*"
+  }
+}

@@ -1,0 +1,271 @@
+// @import "../bower_components/bootstrap/less/mixins.less";
+// @import "../bower_components/bootstrap/less/variables.less";
+@import "../bower_components/bootstrap/less/bootstrap.less";
+
+@bg: transparent;
+
+@body: #fff;
+
+
+@navy: fade(#263248, 90%);
+@light_navy: fade(lighten(#7E8AA2, 10%), 90%);
+@orange: #FF9800;
+@ivory: lighten(@light_navy, 25%);
+
+@nav_bg: fade(@navy, 0%);
+@nav_bg_hover: fade(@navy, 60%);
+@nav_bg_active: @navy;
+@nav: fade(@light_navy, 70%);
+@nav_hover: @light_navy;
+@nav_active: @light_navy;
+@nav_fade: fade(@light_navy, 30%);
+@nav_brand: #fff;
+@nav_tag: @nav_active;
+
+@link: @nav;
+@link_hover: @nav_hover;
+
+/*****************************************************************
+*
+* Style defaults
+*
+******************************************************************/
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: url(../img/norwich-b&w.jpg);
+  background-position: center center;
+  background-size: auto;
+  color: @body;
+  font-family: "Overpass", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+#bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+::selection {
+  background: rgba(227, 80, 80, 0.5);
+  color: #fff;
+}
+
+a {
+  color: @link;
+}
+
+a:hover {
+  color: @link_hover;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 25px 0;
+  color: @body;
+}
+
+/*****************************************************************
+*
+* Angular
+*
+******************************************************************/
+
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}
+
+/*****************************************************************
+*
+* Page
+*
+******************************************************************/
+
+.frame {
+
+}
+
+.main {
+  padding: 100px 0;
+  background: @bg;
+}
+
+
+/*****************************************************************
+*
+* Forms
+*
+******************************************************************/
+
+.form-control {
+  color: #fff;
+  background-color: transparent;
+  border-color: @light_navy;
+}
+
+.form-group {
+  margin-bottom: 50px;
+}
+
+.navbar-fixed-bottom .form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  color: @light_navy;
+  font-weight: 600;
+}
+
+.checkbox label {
+  color: #fff;
+}
+
+
+.btn-default {
+  color: @ivory;
+  background-color: @light_navy;
+  border-color: @nav_bg_active;
+  font-weight: 600;
+  
+  &:hover {
+    color: @ivory;
+    background-color: fade(@light_navy, 75%);
+    border-color: @nav_bg_active;
+  }
+
+  &:focus, &:active, &:focus:active {
+    color: @nav_bg_active;
+    background-color: fade(@light_navy, 100%);
+    border-color: @nav_bg_active;
+  }
+}
+
+.btn-primary {
+  color: @ivory;
+  background-color: @nav_bg_active;
+  border-color: fade(@light_navy, 50%);
+  font-weight: 600;
+  
+  &:hover {
+    color: @ivory;
+    background-color: fade(@nav_bg_active, 75%);
+    border-color: fade(@light_navy, 75%);
+  }
+
+  &:focus, &:active, &:focus:active {
+    color: #000;
+    background-color: fade(@nav_bg_active, 100%);
+    border-color: @light_navy;
+  }
+}
+
+.form-control option {
+  background-color: @nav_bg_active;
+  border-color: fade(@light_navy, 50%);
+  
+  &:hover, &:focus {
+    color: @ivory;
+    background-color: fade(@nav_bg_active, 75%);
+    border-color: fade(@light_navy, 75%);
+  }
+}
+
+/*****************************************************************
+*
+* Table
+*
+******************************************************************/
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: @nav_bg_hover;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  // border: none;
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: @nav_bg_hover;
+}
+
+tr.removed {
+  text-decoration: line-through;
+}
+
+th {
+  color: @light_navy;
+  font-weight: 600;
+}
+
+.label {
+  font-weight: normal;
+  // opacity: 0.75;
+}
+
+.label-default {
+  color: @ivory;
+  // background-color: fade(@light_navy, 75%);
+}
+
+
+/*****************************************************************
+*
+* Selected Mod
+*
+******************************************************************/
+
+#selected-mod {
+  // margin-top: 100px;
+  height: 350px;
+  overflow: auto;
+
+  position: fixed;
+  // top: 0;
+  // right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+
+  background: #000;
+}
+
+.cell-6 {
+  .make-xs-column(3);
+}
+
+.cell-6 {
+  .make-sm-column(12);
+}
+
+.cell-6 {
+  .make-md-column(6);
+}
+
+.cell-6 {
+  .make-lg-column(4);
+}
+
+.cell-12 {
+  .make-xs-column(12);
+}
+
+@media (min-width: 768px) {
+  #selected-mod {
+    margin-top: 100px;
+    height: auto;
+    // bottom: auto;
+    top: 0;
+
+  }
+
+}
