@@ -7,19 +7,19 @@ angular.module('app.ui', ['jsonFormatter'])
 * UI controlller
 *
 ******************************************************************/
-.controller('UICtrl', function($scope, Config, Registry) {
-  var registry
+.controller('UICtrl', function($scope, Config, Modules) {
+  var modules
 
   /**
    * Load the registry
    */
-  Registry.load().then(function(data){
-    registry = data
-    console.log(registry)
+  Modules.get().then(function(data){
+    modules = data
+    console.log(modules)
   })
 
-  $scope.registry = function() {
-    return registry
+  $scope.modules = function() {
+    return modules
   }
 
   $scope.selected = false 

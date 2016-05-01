@@ -83,7 +83,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="(key, mod) in registry().installed_modules" ng-click="select(key, mod)">
+          <tr ng-repeat="(key, mod) in modules()" ng-click="select(key, mod)">
             <td class="text-center"><i class="fa fa-check" aria-hidden="true"></i></td>
             <td>{{ mod.source_module.name }}</td>
             <td>{{ mod.source_module.author.join(', ') }}</td>
@@ -97,7 +97,7 @@
   </div> <!-- .container -->
 </div> <!-- .main -->
 
-<h1>Registry</h1>
-        <json-formatter class="json-formatter-dark" json="registry()" open="1"></json-formatter>
+<h1>Mods</h1>
+<json-formatter class="json-formatter-dark" json="modules()" open="1"></json-formatter>
 
 

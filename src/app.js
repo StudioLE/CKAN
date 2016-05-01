@@ -11,6 +11,7 @@ angular.module('app', [
   'app.config',
   'app.ui',
   'app.registryFactory',
+  'app.modulesFactory'
 ])
 
 /*****************************************************************
