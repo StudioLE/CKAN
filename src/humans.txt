@@ -15,15 +15,8 @@
   
   - - - - - - - - - - - - - - - - - - - - - -
 
-  # CONCEPT
-
-  Concept developed at Northumbria University
-  https://www.northumbria.ac.uk/
-  
-  - - - - - - - - - - - - - - - - - - - - - -
-
   # REPOSITORY
-  https://gitlab.com/StudioLE/CityGraph
+  https://gitlab.com/StudioLE/CKAN
 
   - - - - - - - - - - - - - - - - - - - - - -
 
@@ -43,12 +36,6 @@
 
   LESS
   http://lesscss.org
-
-  Cytoscape.js
-  http://js.cytoscape.org
-
-  Google Places API
-  https://developers.google.com/places
 
   Bootstrap
   http://getbootstrap.com

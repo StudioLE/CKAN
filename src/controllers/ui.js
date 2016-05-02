@@ -42,7 +42,6 @@ angular.module('app.ui', ['jsonFormatter'])
 
   var updateProgress = function() {
     $scope.progress = $scope.progress + 5
-    console.log($scope.progress)
     if($scope.progress < 100) {
       $timeout(updateProgress, 500)
     }

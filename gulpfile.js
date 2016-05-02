@@ -38,7 +38,7 @@ var build = {
 gulp.task('bump', function(){
   gulp.src(['./bower.json', './package.json'])
   .pipe(gp_bump({
-    type:'prerelease'
+    type: 'patch'
   }))
   .pipe(gulp.dest('./'))
 })
@@ -72,7 +72,7 @@ gulp.task('assets', function() {
   gulp.src('src/views/*')
   .pipe(gulp.dest(build.path('views')))
   // Images
-  gulp.src('src/img/norwich-b&w.jpg')
+  gulp.src('src/img/*')
   .pipe(gulp.dest(build.path('img')))
   // Overpass Font
   gulp.src('src/bower_components/overpass/Webfonts/*')
@@ -86,8 +86,6 @@ gulp.task('assets', function() {
   // Favicon
   gulp.src('src/favicon.ico')
   .pipe(gulp.dest(build.path()))
-  gulp.src('src/img/favicon.png')
-  .pipe(gulp.dest(build.path('img')))
 })
 
 // Build app CSS
@@ -140,7 +138,8 @@ gulp.task('vendor-js', function() {
     'src/bower_components/angular/angular.min.js',
     'src/bower_components/angular-resource/angular-resource.min.js',
     'src/bower_components/angular-local-storage/dist/angular-local-storage.min.js',
-    'src/bower_components/json-formatter/dist/json-formatter.min.js'
+    'src/bower_components/json-formatter/dist/json-formatter.min.js',
+    'src/bower_components/semver/semver.browser.js'
 
   ])
   .pipe(gp_concat('concat.js'))

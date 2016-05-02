@@ -3,13 +3,13 @@
 Clone the repository
 
 ```
-git clone https://gitlab.com/StudioLE/TweetMapFrontend.git TweetMap/frontend
+git clone https://gitlab.com/StudioLE/CKAN.git ckan
 ```
 
 Enter the directory and install the dependencies. For this step you'll need to have [Node.js](https://nodejs.org/) and [bower](http://bower.io/) installed.
 
 ```
-cd TweetMap/frontend
+cd ckan
 npm install
 ```
 
@@ -21,11 +21,4 @@ Now run the default gulp task to produce an up to date build
 gulp build
 ```
 
-Now point your websever to either the `build` or `src` directories.
-
-Or you run the bundled node server which will launch the app to `http://localhost:1337`
-
-```
-node cli server src
-node cli server build
-```
+Everything's now ready, just point your preferred web server to either the `build` or `src` directory.
