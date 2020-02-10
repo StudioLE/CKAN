@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  nginx:
+    container_name: ckan
+    image: nginx:1.17.8-alpine
+    volumes:
+      - ./build:/usr/share/nginx/html
+    labels:
+      domain: ckan.studiole.uk
+    restart: unless-stopped
+    networks:
+      - traefik
+networks:
+  traefik:
+    external:
+      name: traefik_web
